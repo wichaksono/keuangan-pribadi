@@ -15,7 +15,6 @@ class Account extends Model
         'name',
         'type',
         'balance',
-        'currency',
         'is_active',
         'created_by',
     ];

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');                  // Nama akun, contoh: BCA, Dompet, OVO
             $table->string('type', 30)->index();     // Jenis akun: cash, bank, ewallet, saving
             $table->decimal('balance', 20, 2)->default(0); // Saldo saat ini
-            $table->string('currency', 10)->default('IDR'); // Mata uang
             $table->boolean('is_active')->default(true);    // Bisa dipakai atau tidak
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

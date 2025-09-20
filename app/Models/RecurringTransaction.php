@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Frequency;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,7 @@ class RecurringTransaction extends Model
     ];
 
     protected $casts = [
+        'frequency'        => Frequency::class,
         'amount'           => 'float',
         'start_date'       => 'date',
         'end_date'         => 'date',
@@ -42,7 +44,7 @@ class RecurringTransaction extends Model
             }
 
             // Jika is_active = true, end_date harus null
-            if ($model->is_active === true) {
+            if ($model->is_active) {
                 $model->end_date = null;
             }
         });

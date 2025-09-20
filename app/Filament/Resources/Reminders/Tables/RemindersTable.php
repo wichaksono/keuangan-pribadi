@@ -16,21 +16,21 @@ class RemindersTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
                 TextColumn::make('title')
+                    ->description(function ($record) {
+                        return $record->reference_type ? "Terkait: {$record->reference_type}" : null;
+                    })
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('reference_type')
-                    ->searchable(),
-                TextColumn::make('reference_id')
-                    ->searchable(),
+                TextColumn::make('description')
+                    ->limit(50),
                 TextColumn::make('reminder_at')
                     ->date()
                     ->sortable(),
                 IconColumn::make('is_completed')
+                    ->alignCenter()
                     ->boolean(),
-                TextColumn::make('created_by')
+                TextColumn::make('creator.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')

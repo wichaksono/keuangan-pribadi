@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Reminders\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class ReminderInfolist
@@ -12,28 +13,49 @@ class ReminderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('id')
-                    ->label('ID'),
-                TextEntry::make('title'),
-                TextEntry::make('description')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('reference_type')
-                    ->placeholder('-'),
-                TextEntry::make('reference_id')
-                    ->placeholder('-'),
-                TextEntry::make('reminder_at')
-                    ->date(),
-                IconEntry::make('is_completed')
-                    ->boolean(),
-                TextEntry::make('created_by')
-                    ->numeric(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                // Menggunakan Card untuk mengelompokkan entri utama
+                Section::make('Informasi Utama')
+                    ->columns()
+                    ->schema([
+                        TextEntry::make('title')
+                            ->label('Judul')
+                            ->placeholder('-')
+                            ->columnSpanFull(),
+
+                        TextEntry::make('description')
+                            ->placeholder('-')
+                            ->label('Deskripsi')
+                            ->columnSpanFull(),
+
+                        TextEntry::make('reminder_at')
+                            ->date()
+                            ->label('Tanggal Pengingat'),
+
+                        IconEntry::make('is_completed')
+                            ->boolean()
+                            ->label('Selesai'),
+                    ]),
+
+                // Menempatkan metadata di bagian bawah
+                Section::make('Metadata')
+                    ->columns()
+                    ->schema([
+                        TextEntry::make('creator.name')
+                            ->numeric()
+                            ->label('Dibuat Oleh')
+                            ->columnSpanFull(),
+
+                        TextEntry::make('created_at')
+                            ->dateTime()
+                            ->placeholder('-')
+                            ->label('Dibuat pada'),
+
+                        TextEntry::make('updated_at')
+                            ->dateTime()
+                            ->placeholder('-')
+                            ->label('Diperbarui pada'),
+                    ])
+                    ->columns(3),
             ]);
     }
 }

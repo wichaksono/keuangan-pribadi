@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Categories\Pages;
 
 use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Utils\Actions\AddNewAction;
+use App\Filament\Utils\Actions\BackAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -13,6 +15,8 @@ class ViewCategory extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            BackAction::make(),
+            AddNewAction::make(),
             EditAction::make(),
         ];
     }

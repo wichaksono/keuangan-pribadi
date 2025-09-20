@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Categories\Tables;
 
+use App\Models\Category;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoriesTable
 {
@@ -15,22 +17,16 @@ class CategoriesTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
                 TextColumn::make('name')
+                    ->formatStateUsing(fn($state, $record) => str_repeat('--', $record->depth) . ' ' . $state)
                     ->searchable(),
                 TextColumn::make('type')
                     ->badge()
-                    ->searchable(),
-                TextColumn::make('parent.name')
-                    ->searchable(),
-                TextColumn::make('order_column')
-                    ->numeric()
                     ->sortable(),
-                TextColumn::make('depth')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('description')
+                    ->placeholder('-')
+                    ->limit(50)
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -51,6 +47,7 @@ class CategoriesTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->deferLoading();
     }
 }

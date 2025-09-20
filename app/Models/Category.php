@@ -28,13 +28,6 @@ class Category extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('ordered', function (Builder $builder) {
-            $builder
-                ->select('categories.*')
-                ->selectRaw('COALESCE(parent_id, id) * 1000 + order_column AS full_order')
-                ->orderBy('full_order');
-        });
-
         static::creating(function ($category) {
             // Hitung depth
             $category->depth = $category->parent_id

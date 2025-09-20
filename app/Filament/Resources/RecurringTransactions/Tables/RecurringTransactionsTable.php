@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\RecurringTransactions\Tables;
 
+use App\Filament\Utils\Currency;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -16,16 +17,14 @@ class RecurringTransactionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('amount')
                     ->numeric()
+                    ->prefix(Currency::symbol())
                     ->sortable(),
                 TextColumn::make('frequency')
-                    ->searchable(),
+                    ->badge(),
                 TextColumn::make('category.name')
                     ->searchable(),
                 TextColumn::make('start_date')
@@ -33,11 +32,14 @@ class RecurringTransactionsTable
                     ->sortable(),
                 TextColumn::make('end_date')
                     ->date()
+                    ->placeholder('No Next Date')
                     ->sortable(),
                 TextColumn::make('next_date')
                     ->date()
+                    ->placeholder('No Next Date')
                     ->sortable(),
                 IconColumn::make('is_active')
+                    ->alignCenter()
                     ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Accounts\Pages;
 
 use App\Filament\Resources\Accounts\AccountResource;
+use App\Filament\Utils\Actions\AddNewAction;
+use App\Filament\Utils\Actions\BackAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -13,6 +15,8 @@ class ViewAccount extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            BackAction::make(),
+            AddNewAction::make(),
             EditAction::make(),
         ];
     }

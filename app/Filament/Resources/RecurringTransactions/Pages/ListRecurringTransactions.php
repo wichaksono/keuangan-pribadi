@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\RecurringTransactions\Pages;
 
 use App\Filament\Resources\RecurringTransactions\RecurringTransactionResource;
+use App\Filament\Utils\Actions\AddNewAction;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,7 @@ class ListRecurringTransactions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            AddNewAction::make(),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Accounts\Tables;
 
+use App\Filament\Utils\Currency;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -16,22 +17,20 @@ class AccountsTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('type')
                     ->badge()
                     ->searchable(),
                 TextColumn::make('balance')
+                    ->prefix(Currency::symbol())
                     ->numeric()
+                    ->alignEnd()
                     ->sortable(),
-                TextColumn::make('currency')
-                    ->searchable(),
                 IconColumn::make('is_active')
+                    ->alignCenter()
                     ->boolean(),
-                TextColumn::make('created_by')
+                TextColumn::make('creator.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
