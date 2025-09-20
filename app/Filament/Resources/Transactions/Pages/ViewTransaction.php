@@ -17,7 +17,6 @@ class ViewTransaction extends ViewRecord
         return [
             BackAction::make(),
             AddNewAction::make(),
-            EditAction::make(),
         ];
     }
 }

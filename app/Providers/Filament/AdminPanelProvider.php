@@ -60,10 +60,12 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('Add Income')
                     ->url(fn() => TransactionResource::getUrl('create', ['type' => 'income']))
                     ->icon(Heroicon::OutlinedPlusCircle)
+                    ->isActiveWhen(fn() => request()->get('type') === 'income')
                     ->sort(1),
                 NavigationItem::make('Add Expense')
                     ->url(fn() => TransactionResource::getUrl('create', ['type' => 'expense']))
                     ->icon(Heroicon::OutlinedMinusCircle)
+                    ->isActiveWhen(fn() => request()->get('type') === 'expense')
                     ->sort(2),
             ]);
     }
