@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Reminders\Tables;
+namespace App\Filament\Resources\RecurringExpenses\Tables;
 
-use App\Enums\ReminderPriority;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -10,37 +9,34 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
-class RemindersTable
+class RecurringExpensesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->striped()
             ->columns([
-                TextColumn::make('title')
-                    ->description(function ($record) {
-                        return $record->reference_type ? "Terkait: {$record->reference_type}" : null;
-                    })
-                    ->sortable()
+                TextColumn::make('id')
+                    ->label('ID')
                     ->searchable(),
-                TextColumn::make('description')
-                    ->limit(50),
-                TextColumn::make('priority')
-                    ->badge()
-                    ->alignCenter()
-                    ->sortable(query: function (Builder $query, string $direction) {
-                        $priorityOrder = implode("','", ReminderPriority::toArray());
-                        $query->orderByRaw("FIELD(priority, '{$priorityOrder}') $direction");
-                    }),
-                TextColumn::make('reminder_at')
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('account_id')
+                    ->searchable(),
+                TextColumn::make('amount')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('start_date')
                     ->date()
                     ->sortable(),
-                IconColumn::make('is_completed')
-                    ->alignCenter()
+                TextColumn::make('end_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('frequency')
+                    ->searchable(),
+                IconColumn::make('is_active')
                     ->boolean(),
-                TextColumn::make('creator.name')
+                TextColumn::make('created_by')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')

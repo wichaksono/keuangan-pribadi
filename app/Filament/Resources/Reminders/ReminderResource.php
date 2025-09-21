@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Reminders;
 
+use App\Enums\ReminderPriority;
 use App\Filament\Resources\Reminders\Pages\CreateReminder;
 use App\Filament\Resources\Reminders\Pages\EditReminder;
 use App\Filament\Resources\Reminders\Pages\ListReminders;
@@ -15,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use UnitEnum;
 
 class ReminderResource extends Resource
@@ -23,7 +25,7 @@ class ReminderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBellAlert;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Productivity';
+    protected static string | UnitEnum | null $navigationGroup = 'Reminders';
 
     protected static ?int $navigationSort = 4;
 
