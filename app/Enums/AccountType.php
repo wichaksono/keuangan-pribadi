@@ -7,11 +7,11 @@ use Filament\Support\Contracts\HasLabel;
 
 enum AccountType: string implements HasLabel, HasColor
 {
-    case ASSET     = 'asset';
-    case LIABILITY = 'liability';
-    case EQUITY    = 'equity';
-    case REVENUE   = 'revenue';
-    case EXPENSE   = 'expense';
+    case ASSET     = 'asset'; // Assets include cash, accounts receivable, inventory, property, plant, equipment, etc.
+    case LIABILITY = 'liability'; // Liabilities include accounts payable, loans, mortgages, etc.
+    case EQUITY    = 'equity'; // Equity includes owner's equity, retained earnings, etc.
+    case REVENUE   = 'revenue'; // Revenue includes sales, service income, interest income, etc.
+    case EXPENSE   = 'expense'; // Expenses include cost of goods sold, salaries, rent, utilities, etc.
 
     public function getLabel(): string
     {

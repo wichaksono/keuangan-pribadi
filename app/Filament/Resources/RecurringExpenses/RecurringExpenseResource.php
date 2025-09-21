@@ -15,12 +15,17 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class RecurringExpenseResource extends Resource
 {
     protected static ?string $model = RecurringExpense::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
+
+    protected static string | UnitEnum | null $navigationGroup = 'Master Data';
+
+    protected static ?int $navigationSort = 15;
 
     public static function form(Schema $schema): Schema
     {

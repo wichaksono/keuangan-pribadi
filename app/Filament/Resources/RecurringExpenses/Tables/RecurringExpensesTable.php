@@ -16,24 +16,23 @@ class RecurringExpensesTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('account_id')
-                    ->searchable(),
+                TextColumn::make('account.name')
+                    ->sortable(),
                 TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('start_date')
+                TextColumn::make('due_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('next_date')
                     ->date()
                     ->sortable(),
                 TextColumn::make('end_date')
+                    ->placeholder('No End Date')
                     ->date()
                     ->sortable(),
-                TextColumn::make('frequency')
-                    ->searchable(),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_by')

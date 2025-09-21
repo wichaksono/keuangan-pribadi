@@ -9,31 +9,31 @@ use Filament\Support\Contracts\HasLabel;
 enum Frequency: string implements HasLabel, HasColor
 {
     //'daily', 'weekly', 'monthly', 'yearly'
-    case Daily   = 'daily';
-    case Weekly  = 'weekly';
-    case Monthly = 'monthly';
-    case Yearly  = 'yearly';
-    case Custom  = 'custom';
+    case DAILY   = 'daily';
+    case WEEKLY  = 'weekly';
+    case MONTHLY = 'monthly';
+    case YEARLY = 'yearly';
+    case CUSTOM = 'custom';
 
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::Daily   => 'Daily',
-            self::Weekly  => 'Weekly',
-            self::Monthly => 'Monthly',
-            self::Yearly  => 'Yearly',
-            self::Custom  => 'Custom',
+            self::DAILY   => 'Daily',
+            self::WEEKLY  => 'Weekly',
+            self::MONTHLY => 'Monthly',
+            self::YEARLY  => 'Yearly',
+            self::CUSTOM  => 'Custom',
         };
     }
 
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::Daily   => 'info',
-            self::Weekly  => 'primary',
-            self::Monthly => 'warning',
-            self::Yearly  => 'success',
-            self::Custom  => 'secondary',
+            self::DAILY   => 'info',
+            self::WEEKLY  => 'primary',
+            self::MONTHLY => 'warning',
+            self::YEARLY  => 'success',
+            self::CUSTOM  => 'secondary',
         };
     }
 
@@ -41,11 +41,11 @@ enum Frequency: string implements HasLabel, HasColor
     public function toUnit(): string
     {
         return match ($this) {
-            self::Daily   => 'days',
-            self::Weekly  => 'weeks',
-            self::Monthly => 'months',
-            self::Yearly  => 'years',
-            self::Custom  => 'custom',
+            self::DAILY   => 'days',
+            self::WEEKLY  => 'weeks',
+            self::MONTHLY => 'months',
+            self::YEARLY  => 'years',
+            self::CUSTOM  => 'custom',
         };
     }
 }

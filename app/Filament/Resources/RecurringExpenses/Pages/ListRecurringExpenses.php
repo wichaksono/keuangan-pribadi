@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\RecurringExpenses\Pages;
 
 use App\Filament\Resources\RecurringExpenses\RecurringExpenseResource;
+use App\Filament\Utils\Actions\AddNewAction;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,7 @@ class ListRecurringExpenses extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            AddNewAction::make(),
         ];
     }
 }
