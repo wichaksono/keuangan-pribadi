@@ -47,21 +47,21 @@ class Transaction extends Model
     protected function amount(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->entries->where('type', TransactionEntiryType::DEBIT)->sum('amount'),
+            get: fn() => $this->entries->where('type', TransactionEntiryType::DEBIT)->sum('amount'),
         );
     }
 
     protected function totalDebit(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->entries->where('type', TransactionEntiryType::DEBIT)->sum('amount'),
+            get: fn() => $this->entries->where('type', TransactionEntiryType::DEBIT)->sum('amount'),
         );
     }
 
     protected function totalCredit(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->entries->where('type', TransactionEntiryType::CREDIT)->sum('amount'),
+            get: fn() => $this->entries->where('type', TransactionEntiryType::CREDIT)->sum('amount'),
         );
     }
 }

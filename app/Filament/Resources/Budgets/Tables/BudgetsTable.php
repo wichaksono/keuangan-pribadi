@@ -9,7 +9,6 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -53,9 +52,9 @@ class BudgetsTable
                     ->trueLabel(date('Y'))
                     ->default(true)
                     ->queries(
-                        true: fn ($query) => $query->where('year', now()->year),
-                        false: fn ($query) => $query->where('year', '<>', now()->year),
-                        blank: fn ($query) => $query,
+                        true: fn($query) => $query->where('year', now()->year),
+                        false: fn($query) => $query->where('year', '<>', now()->year),
+                        blank: fn($query) => $query,
                     ),
 
                 TernaryFilter::make('current_month')
@@ -63,12 +62,11 @@ class BudgetsTable
                     ->trueLabel(date('F'))
                     ->default(true)
                     ->queries(
-                        true: fn ($query) => $query->where('year', now()->year)->where('month', now()->month),
-                        false: fn ($query) => $query->where(fn ($q) =>
-                        $q->where('year', '<>', now()->year)
+                        true: fn($query) => $query->where('year', now()->year)->where('month', now()->month),
+                        false: fn($query) => $query->where(fn($q) => $q->where('year', '<>', now()->year)
                             ->orWhere('month', '<>', now()->month)
                         ),
-                        blank: fn ($query) => $query,
+                        blank: fn($query) => $query,
                     ),
             ])
             ->recordActions([

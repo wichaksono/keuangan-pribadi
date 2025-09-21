@@ -98,7 +98,6 @@ class TransactionForm
                                                 $query->where('type', $get('account_type'));
                                             }
                                             $query->where('is_active', true);
-                                            $query->where('balance', '>', 0);
                                             $query->orderBy('code');
                                         })
                                     ->required()

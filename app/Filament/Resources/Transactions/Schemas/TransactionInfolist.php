@@ -21,21 +21,18 @@ class TransactionInfolist
 
                 Group::make([
                     Section::make('Informasi Dasar')
-                        ->columns(1)
+                        ->columns()
                         ->schema([
                             TextEntry::make('title')
                                 ->label('Judul'),
+                            TextEntry::make('date')
+                                ->date()
+                                ->label('Tanggal'),
                             TextEntry::make('description')
                                 ->placeholder('-')
-                                ->label('Deskripsi'),
-                            Group::make([
-                                TextEntry::make('type')
-                                    ->badge()
-                                    ->label('Tipe'),
-                                TextEntry::make('date')
-                                    ->date()
-                                    ->label('Tanggal'),
-                            ])->columns(3)
+                                ->label('Deskripsi')
+                                ->columnSpanFull(),
+
                         ]),
 
 
@@ -66,7 +63,7 @@ class TransactionInfolist
                         ImageEntry::make('attachments')
                             ->placeholder('-')
                             ->label('Lampiran')
-                        ->columnSpanFull(),
+                            ->columnSpanFull(),
                         TextEntry::make('creator.name')
                             ->numeric()
                             ->label('Dibuat Oleh')

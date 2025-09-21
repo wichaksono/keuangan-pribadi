@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Budgets\Pages;
 
 use App\Filament\Resources\Budgets\BudgetResource;
 use App\Filament\Utils\Actions\AddNewAction;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListBudgets extends ListRecords

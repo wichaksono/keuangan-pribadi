@@ -23,7 +23,7 @@ class AccountResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Master Data';
+    protected static string|UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static ?int $navigationSort = 10;
 
@@ -52,10 +52,10 @@ class AccountResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListAccounts::route('/'),
+            'index'  => ListAccounts::route('/'),
             'create' => CreateAccount::route('/create'),
-            'view' => ViewAccount::route('/{record}'),
-            'edit' => EditAccount::route('/{record}/edit'),
+            'view'   => ViewAccount::route('/{record}'),
+            'edit'   => EditAccount::route('/{record}/edit'),
         ];
     }
 }

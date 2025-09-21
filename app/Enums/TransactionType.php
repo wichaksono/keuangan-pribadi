@@ -5,13 +5,12 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;
-use function Symfony\Component\String\s;
 
 enum TransactionType: string implements HasLabel, HasColor
 {
 
-    case ADVANCED = 'advanced';
-    case INCOME   = 'income';
+    case ADVANCED   = 'advanced';
+    case INCOME     = 'income';
     case EXPENSE    = 'expense';
     case ADJUSTMENT = 'adjustment';
     case TRANSFER   = 'transfer';

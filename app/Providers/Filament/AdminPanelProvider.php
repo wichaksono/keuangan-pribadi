@@ -13,8 +13,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Icons\Heroicon;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -32,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary'   => Color::Amber,
                 'secondary' => Color::Slate,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
@@ -58,15 +56,20 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationItems([
                 NavigationItem::make('Add Income')
-                    ->url(fn() => TransactionResource::getUrl('create', ['type' => 'income']))
+                    ->url(fn() => TransactionResource::getUrl('income'))
                     ->icon(Heroicon::OutlinedPlusCircle)
-                    ->isActiveWhen(fn() => request()->get('type') === 'income')
+                    ->isActiveWhen(fn() => request()->routeIs(TransactionResource::getRouteBaseName() . '.income'))
                     ->sort(1),
                 NavigationItem::make('Add Expense')
-                    ->url(fn() => TransactionResource::getUrl('create', ['type' => 'expense']))
+                    ->url(fn() => TransactionResource::getUrl('expense'))
                     ->icon(Heroicon::OutlinedMinusCircle)
-                    ->isActiveWhen(fn() => request()->get('type') === 'expense')
+                    ->isActiveWhen(fn() => request()->routeIs(TransactionResource::getRouteBaseName() . '.expense'))
                     ->sort(2),
+                NavigationItem::make('Add Transfer')
+                    ->url(fn() => TransactionResource::getUrl('transfer'))
+                    ->icon(Heroicon::OutlinedArrowsRightLeft)
+                    ->isActiveWhen(fn() => request()->routeIs(TransactionResource::getRouteBaseName() . '.transfer'))
+                    ->sort(3),
             ])
             ->databaseTransactions();
     }

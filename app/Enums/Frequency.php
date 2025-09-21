@@ -3,7 +3,6 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasLabel;
 
 enum Frequency: string implements HasLabel, HasColor
@@ -12,8 +11,8 @@ enum Frequency: string implements HasLabel, HasColor
     case DAILY   = 'daily';
     case WEEKLY  = 'weekly';
     case MONTHLY = 'monthly';
-    case YEARLY = 'yearly';
-    case CUSTOM = 'custom';
+    case YEARLY  = 'yearly';
+    case CUSTOM  = 'custom';
 
     public function getLabel(): ?string
     {

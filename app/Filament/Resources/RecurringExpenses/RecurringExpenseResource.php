@@ -23,7 +23,7 @@ class RecurringExpenseResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Master Data';
+    protected static string|UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static ?int $navigationSort = 15;
 
@@ -52,10 +52,10 @@ class RecurringExpenseResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListRecurringExpenses::route('/'),
+            'index'  => ListRecurringExpenses::route('/'),
             'create' => CreateRecurringExpense::route('/create'),
-            'view' => ViewRecurringExpense::route('/{record}'),
-            'edit' => EditRecurringExpense::route('/{record}/edit'),
+            'view'   => ViewRecurringExpense::route('/{record}'),
+            'edit'   => EditRecurringExpense::route('/{record}/edit'),
         ];
     }
 }

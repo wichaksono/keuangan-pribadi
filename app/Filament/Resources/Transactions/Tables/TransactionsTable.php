@@ -19,11 +19,6 @@ class TransactionsTable
 
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('type')
-                    ->label('Tipe Transaksi')
-                    ->badge()
-                    ->alignCenter()
-                    ->searchable(),
 
                 TextColumn::make('totalDebit')
                     ->label('Debit')

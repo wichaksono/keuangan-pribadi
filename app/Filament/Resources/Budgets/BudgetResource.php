@@ -23,7 +23,7 @@ class BudgetResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWallet;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Master Data';
+    protected static string|UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static ?int $navigationSort = 11;
 
@@ -52,10 +52,10 @@ class BudgetResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListBudgets::route('/'),
+            'index'  => ListBudgets::route('/'),
             'create' => CreateBudget::route('/create'),
-            'view' => ViewBudget::route('/{record}'),
-            'edit' => EditBudget::route('/{record}/edit'),
+            'view'   => ViewBudget::route('/{record}'),
+            'edit'   => EditBudget::route('/{record}/edit'),
         ];
     }
 }

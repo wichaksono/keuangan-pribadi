@@ -78,7 +78,7 @@ final class Currency
     /**
      * Get the formatted currency value.
      *
-     * @param float $number The value to format.
+     * @param  float  $number  The value to format.
      * @return string The formatted currency value.
      */
     public static function format(float $number): string
@@ -94,7 +94,7 @@ final class Currency
     /**
      * Get the formatted currency value without the currency symbol.
      *
-     * @param float $number The value to format.
+     * @param  float  $number  The value to format.
      * @return string The formatted number without currency symbol.
      */
     public static function numberOnly(float $number): string

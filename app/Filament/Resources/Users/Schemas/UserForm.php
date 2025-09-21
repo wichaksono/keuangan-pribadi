@@ -38,7 +38,8 @@ class UserForm
                             ->minLength(8)
                             ->placeholder('Minimal 8 karakter')
                             ->helperText(function ($operation) {
-                                return $operation === 'edit' ? 'Biarkan kosong untuk mempertahankan kata sandi saat ini.' : '';
+                                return $operation === 'edit' ?
+                                    'Biarkan kosong untuk mempertahankan kata sandi saat ini.' : '';
                             }),
                         DateTimePicker::make('email_verified_at')
                             ->label('Tanggal Verifikasi Email')
