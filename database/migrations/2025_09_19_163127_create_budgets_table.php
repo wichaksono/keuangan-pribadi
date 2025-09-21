@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->foreignUuid('account_id')->constrained('accounts')->cascadeOnDelete();
             $table->decimal('amount', 20, 2);
             $table->unsignedTinyInteger('month');
             $table->unsignedSmallInteger('year');

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Transactions\Schemas;
 
 use App\Filament\Utils\Currency;
 use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
@@ -28,10 +29,6 @@ class TransactionInfolist
                                 ->placeholder('-')
                                 ->label('Deskripsi'),
                             Group::make([
-                                TextEntry::make('amount')
-                                    ->numeric()
-                                    ->prefix(Currency::symbol())
-                                    ->label('Jumlah'),
                                 TextEntry::make('type')
                                     ->badge()
                                     ->label('Tipe'),
@@ -42,28 +39,34 @@ class TransactionInfolist
                         ]),
 
 
-                    Section::make('Kategori dan Akun')
+                    Section::make('Entri Transaksi')
                         ->schema([
-                            TextEntry::make('category.name')
-                                ->label('Kategori'),
-                            TextEntry::make('account.name')
-                                ->label('Akun'),
+                            RepeatableEntry::make('entries')
+                                ->hiddenLabel()
+                                ->contained(false)
+                                ->schema([
+                                    TextEntry::make('account.name')
+                                        ->label('Akun'),
+                                    TextEntry::make('type')
+                                        ->badge()
+                                        ->label('Tipe'),
+                                    TextEntry::make('amount')
+                                        ->numeric()
+                                        ->prefix(Currency::symbol())
+                                        ->label('Jumlah'),
+                                ])->columns(3)
+                                ->columnSpanFull(),
                         ])
                         ->columns(2),
-
-                    // Mengelompokkan metadata seperti lampiran
-                    Section::make('Detail Transaksi')
-                        ->schema([
-                            ImageEntry::make('attachments')
-                                ->placeholder('-')
-                                ->label('Lampiran'),
-                        ])
-                        ->columns(1),
                 ])->columnSpan(2),
 
                 Section::make('Metadata')
                     ->columns()
                     ->schema([
+                        ImageEntry::make('attachments')
+                            ->placeholder('-')
+                            ->label('Lampiran')
+                        ->columnSpanFull(),
                         TextEntry::make('creator.name')
                             ->numeric()
                             ->label('Dibuat Oleh')

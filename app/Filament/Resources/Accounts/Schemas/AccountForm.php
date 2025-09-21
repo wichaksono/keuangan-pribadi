@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Accounts\Schemas;
 
 use App\Enums\AccountType;
+use App\Enums\TransactionEntiryType;
 use App\Filament\Utils\Currency;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -37,12 +38,18 @@ class AccountForm
                         Select::make('type')
                             ->label('Tipe Akun')
                             ->options(AccountType::class)
+                            ->disabled(fn($operation) => $operation === 'edit')
                             ->required()
                             ->placeholder('Pilih tipe akun'),
+                        Select::make('normal_position')
+                            ->label('Posisi Normal')
+                            ->options(TransactionEntiryType::class)
+                            ->required()
+                            ->placeholder('Pilih posisi normal akun'),
                         TextInput::make('balance')
                             ->label('Saldo Awal')
-                            ->required()
                             ->numeric()
+                            ->disabled()
                             ->default(0.0)
                             ->prefix(Currency::symbol()),
                     ]),

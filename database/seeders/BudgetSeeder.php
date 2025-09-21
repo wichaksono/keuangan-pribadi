@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\AccountType;
+use App\Models\Account;
 use App\Models\Budget;
 use App\Models\Category;
 use App\Models\User;
@@ -20,11 +22,10 @@ class BudgetSeeder extends Seeder
         }
 
         // Ambil beberapa kategori pengeluaran
-        $categories = Category::where('type', 'expense')
-            ->whereIn('name', ['Makanan & Minuman', 'Transportasi', 'Tagihan'])
+        $accounts = Account::where('type', AccountType::ASSET)
             ->get();
 
-        if ($categories->isEmpty()) {
+        if ($accounts->isEmpty()) {
             $this->command->warn('Seeder Budget dilewati karena belum ada kategori expense.');
             return;
         }
@@ -32,13 +33,13 @@ class BudgetSeeder extends Seeder
         $year = now()->year;
 
         foreach (range(1, 12) as $month) {
-            foreach ($categories as $category) {
+            foreach ($accounts as $account) {
                 Budget::create([
-                    'category_id' => $category->id,
+                    'account_id' => $account->id,
                     'amount'      => fake()->randomFloat(2, 500000, 3000000), // 500 ribu – 3 juta
                     'month'       => $month,
                     'year'        => $year,
-                    'notes'       => 'Budget bulanan untuk ' . $category->name,
+                    'notes'       => 'Budget bulanan untuk ' . $account->name,
                     'created_by'  => $user->id,
                 ]);
             }

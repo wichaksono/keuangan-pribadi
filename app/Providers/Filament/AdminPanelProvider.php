@@ -67,6 +67,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon(Heroicon::OutlinedMinusCircle)
                     ->isActiveWhen(fn() => request()->get('type') === 'expense')
                     ->sort(2),
-            ]);
+            ])
+            ->databaseTransactions();
     }
 }

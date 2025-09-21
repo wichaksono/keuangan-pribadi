@@ -28,6 +28,9 @@ class AccountInfolist
                             IconEntry::make('is_active')
                                 ->label('Status')
                                 ->boolean(),
+                            TextEntry::make('normal_position')
+                                ->badge()
+                                ->label('Posisi Normal'),
                         ])->columns(3),
                         TextEntry::make('balance')
                             ->label('Saldo')

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Account;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -24,9 +23,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            CategorySeeder::class,
-            BudgetSeeder::class,
             AccountSeeder::class,
+            BudgetSeeder::class,
         ]);
     }
 }

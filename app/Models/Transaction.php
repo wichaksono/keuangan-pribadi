@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionEntiryType;
 use App\Enums\TransactionType;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Transaction extends Model
 {
@@ -14,11 +17,8 @@ class Transaction extends Model
     protected $fillable = [
         'title',
         'description',
-        'amount',
         'type',
         'date',
-        'category_id',
-        'account_id',
         'attachments',
         'created_by',
     ];
@@ -27,24 +27,41 @@ class Transaction extends Model
         'type'        => TransactionType::class,
         'date'        => 'date',
         'attachments' => 'array',
-        'amount'      => 'float',
     ];
 
-    // Relasi ke Category
-    public function category(): BelongsTo
+    public function entries(): HasMany
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->hasMany(TransactionEntry::class);
     }
 
-    // Relasi ke Account
-    public function account(): BelongsTo
-    {
-        return $this->belongsTo(Account::class, 'account_id');
-    }
-
-    // Relasi ke User (creator)
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * --------------------------------------------------
+     * accessors
+     * --------------------------------------------------
+     */
+    protected function amount(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->entries->where('type', TransactionEntiryType::DEBIT)->sum('amount'),
+        );
+    }
+
+    protected function totalDebit(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->entries->where('type', TransactionEntiryType::DEBIT)->sum('amount'),
+        );
+    }
+
+    protected function totalCredit(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->entries->where('type', TransactionEntiryType::CREDIT)->sum('amount'),
+        );
     }
 }

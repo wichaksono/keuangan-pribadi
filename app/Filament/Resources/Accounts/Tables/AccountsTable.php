@@ -17,11 +17,17 @@ class AccountsTable
     {
         return $table
             ->columns([
+                TextColumn::make('code')
+                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('type')
                     ->badge()
-                    ->searchable(),
+                    ->sortable(),
+                TextColumn::make('normal_position')
+                    ->badge()
+                    ->alignCenter()
+                    ->sortable(),
                 TextColumn::make('balance')
                     ->prefix(Currency::symbol())
                     ->numeric()

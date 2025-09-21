@@ -1,11 +1,11 @@
 <?php
 
+use App\Enums\TransactionType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title');
+            $table->string('title')->index();
             $table->text('description')->nullable();
-            $table->decimal('amount', 20, 2);
-            $table->string('type', 20)->index();
+            $table->string('type', 20)
+                ->default(TransactionType::INCOME)
+                ->index();
             $table->date('date');
-            $table->foreignUuid('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignUuid('account_id')->constrained('accounts')->onDelete('cascade');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->json('attachments')->nullable();
             $table->timestamps();
